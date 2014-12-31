@@ -46,8 +46,8 @@ public class XMLHelper extends DefaultHandler {
     }
 
     // This method receives notification character data inside an element
-    // e.g. <post_title>Add EditText Programmatically - Android</post_title>
-    // It will be called to read "Add EditText Programmatically - Android"
+    // e.g. <post_title>Add EditText Pragmatically - Android</post_title>
+    // It will be called to read "Add EditText Pragmatically - Android"
     @Override
     public void characters(char[] ch, int start, int length)
             throws SAXException {
@@ -58,7 +58,7 @@ public class XMLHelper extends DefaultHandler {
     }
 
     // Receives notification of end of element
-    // e.g. <post_title>Add EditText Programmatically - Android</post_title>
+    // e.g. <post_title>Add EditText Pragmatically - Android</post_title>
     // It will be called when </post_title> is encountered
     @Override
     public void endElement(String uri, String localName, String qName)
@@ -79,7 +79,7 @@ public class XMLHelper extends DefaultHandler {
     }
 
     // Receives notification of start of an element
-    // e.g. <post_title>Add EditText Programmatically - Android</post_title>
+    // e.g. <post_title>Add EditText Pragmatically - Android</post_title>
     // It will be called when <post_title> is encountered
     @Override
     public void startElement(String uri, String localName, String qName,
