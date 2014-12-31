@@ -4,18 +4,18 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.TextView;
+import android.widget.ListView;
 
 public class MainActivity extends ActionBarActivity {
 
-    TextView tvResponse;
+    ListView lvPcsPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvResponse = (TextView) findViewById(R.id.tvResponse);
+        lvPcsPost = (ListView) findViewById(R.id.lvPcsPost);
         new PostAsync().execute();
     }
 
@@ -38,14 +38,8 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            StringBuilder builder = new StringBuilder();
-            for (PostValue post : helper.posts) {
-                builder.append("\nPost: ").append(post.getTitle());
-                builder.append("\nPublish Date: ").append(post.getDate());
-                builder.append("\nGuid: ").append(post.getGuid());
-                builder.append("\n");
-            }
-            tvResponse.setText(builder.toString());
+            PostBaseAdapter postBaseAdapter = new PostBaseAdapter(MainActivity.this, helper.posts);
+            lvPcsPost.setAdapter(postBaseAdapter);
             pd.dismiss();
         }
 
