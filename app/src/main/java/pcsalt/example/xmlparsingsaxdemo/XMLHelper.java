@@ -24,8 +24,12 @@ public class XMLHelper extends DefaultHandler {
 
     Boolean currTag = false;
     String currTagVal = "";
-    public PostValue post = null;
-    public ArrayList<PostValue> posts = new ArrayList<PostValue>();
+    private PostValue post = null;
+    private ArrayList<PostValue> posts = new ArrayList<PostValue>();
+
+    public ArrayList<PostValue> getPostsList() {
+        return this.posts;
+    }
 
     /**
      * Method to read XML from {@link pcsalt.example.xmlparsingsaxdemo.XMLHelper#URL_MAIN}
