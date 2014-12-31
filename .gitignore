@@ -1,0 +1,11 @@
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/gradle
+*.iml
+*.apk
+*.log
+*.txt
+/app/src/androidTest/
