@@ -19,16 +19,15 @@ public class XMLHelper extends DefaultHandler {
     /**
      * The URL to be parsed
      */
-    private String URL_MAIN = "http://pcsalt.com/postservice/?format=xml";
-    String TAG = "XMLHelper";
+    private final String URL_MAIN = "https://pcsalt.com/sample.xml";
+    private final String TAG = "XMLHelper";
+    private final ArrayList<BookDetails> bookDetailsArrayList = new ArrayList<>();
+    private Boolean currTag = false;
+    private String currTagVal = "";
+    private BookDetails bookDetails = null;
 
-    Boolean currTag = false;
-    String currTagVal = "";
-    private PostValue post = null;
-    private ArrayList<PostValue> posts = new ArrayList<PostValue>();
-
-    public ArrayList<PostValue> getPostsList() {
-        return this.posts;
+    public ArrayList<BookDetails> getPostsList() {
+        return this.bookDetailsArrayList;
     }
 
     /**
@@ -69,17 +68,23 @@ public class XMLHelper extends DefaultHandler {
             throws SAXException {
         currTag = false;
 
-        if (localName.equalsIgnoreCase("post_title"))
-            post.setTitle(currTagVal);
+        if (localName.equalsIgnoreCase("author"))
+            bookDetails.setAuthor(currTagVal);
 
-        else if (localName.equalsIgnoreCase("guid"))
-            post.setGuid(currTagVal);
+        else if (localName.equalsIgnoreCase("title"))
+            bookDetails.setTitle(currTagVal);
 
-        else if (localName.equalsIgnoreCase("post_date"))
-            post.setDate(currTagVal);
+        else if (localName.equalsIgnoreCase("genre"))
+            bookDetails.setGenre(currTagVal);
 
-        else if (localName.equalsIgnoreCase("post"))
-            posts.add(post);
+        else if (localName.equalsIgnoreCase("publish_date"))
+            bookDetails.setPublishDate(currTagVal);
+
+        else if (localName.equalsIgnoreCase("description"))
+            bookDetails.setDescription(currTagVal);
+
+        else if (localName.equalsIgnoreCase("book"))
+            bookDetailsArrayList.add(bookDetails);
     }
 
     // Receives notification of start of an element
@@ -92,8 +97,8 @@ public class XMLHelper extends DefaultHandler {
 
         currTag = true;
         currTagVal = "";
-        // Whenever <post> element is encountered it will create new object of PostValue
-        if (localName.equals("post"))
-            post = new PostValue();
+        // Whenever <post> element is encountered it will create new object of BookDetails
+        if (localName.equals("book"))
+            bookDetails = new BookDetails();
     }
 }

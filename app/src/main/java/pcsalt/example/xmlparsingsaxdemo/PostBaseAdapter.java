@@ -1,6 +1,5 @@
 package pcsalt.example.xmlparsingsaxdemo;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +13,20 @@ import java.util.ArrayList;
  */
 public class PostBaseAdapter extends BaseAdapter {
 
-    private LayoutInflater layoutInflater;
-    private ArrayList<PostValue> postValueArrayList;
+    private final ArrayList<BookDetails> bookDetailsArrayList;
 
-    public PostBaseAdapter(Context context, ArrayList<PostValue> postValueArrayList) {
-        this.layoutInflater = LayoutInflater.from(context);
-        this.postValueArrayList = postValueArrayList;
-
+    public PostBaseAdapter(ArrayList<BookDetails> bookDetailsArrayList) {
+        this.bookDetailsArrayList = bookDetailsArrayList;
     }
 
     @Override
     public int getCount() {
-        return postValueArrayList.size();
+        return bookDetailsArrayList.size();
     }
 
     @Override
-    public PostValue getItem(int position) {
-        return postValueArrayList.get(position);
+    public BookDetails getItem(int position) {
+        return bookDetailsArrayList.get(position);
     }
 
     @Override
@@ -42,27 +38,41 @@ public class PostBaseAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = layoutInflater.inflate(R.layout.list_item_post, parent, false);
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_post, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        PostValue postValue = getItem(position);
+        BookDetails bookDetails = getItem(position);
 
-        viewHolder.tvTitle.setText(postValue.getTitle());
-        viewHolder.tvPublishDate.setText(postValue.getDate());
+        viewHolder.setData(bookDetails);
 
         return convertView;
     }
 
     private class ViewHolder {
-        TextView tvTitle, tvPublishDate;
+        TextView tvTitle;
+        TextView tvAuthor;
+        TextView tvGenre;
+        TextView tvDescription;
+        TextView tvPublishDate;
 
         public ViewHolder(View item) {
             tvTitle = (TextView) item.findViewById(R.id.tvTitle);
+            tvAuthor = (TextView) item.findViewById(R.id.tvAuthor);
+            tvGenre = (TextView) item.findViewById(R.id.tvGenre);
+            tvDescription = (TextView) item.findViewById(R.id.tvDescription);
             tvPublishDate = (TextView) item.findViewById(R.id.tvPublishDate);
+        }
+
+        public void setData(BookDetails details) {
+            tvTitle.setText(details.getTitle());
+            tvAuthor.setText(details.getAuthor());
+            tvGenre.setText(details.getGenre());
+            tvDescription.setText(details.getDescription());
+            tvPublishDate.setText(details.getPublishDate());
         }
     }
 }
