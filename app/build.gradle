@@ -1,24 +1,25 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "pcsalt.example.xmlparsingsaxdemo"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 }
